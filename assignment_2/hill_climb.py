@@ -29,19 +29,31 @@ def hill_climbing(
     Returns:
         tuple: A tuple containing the x-value and the corresponding maximum value of the function.
     """
+    # Unpack bounds into lower and upper bound variables
     l_bound, r_bound = bounds
+    
+    # If no initial state is provided, start from the middle of the search space
     x = init_state if init_state is not None else l_bound + (r_bound - l_bound) / 2
-    curr = x
+    
+    curr = x  # Current state initialized to starting point
+    
+    # Continue climbing until no better neighbor is found
     while True:
+        # Calculate left and right neighboring points
         l_neighbor = curr - step_size
         r_neighbor = curr + step_size
 
+        # If the left neighbor is within bounds and improves the function, move left
         if l_neighbor >= l_bound and func(l_neighbor) > func(curr):
             curr = l_neighbor
+        # If the right neighbor is within bounds and improves the function, move right
         elif r_neighbor <= r_bound and func(r_neighbor) > func(curr):
             curr = r_neighbor
+        # No improvement in either direction, so stop climbing
         else:
             break
+    
+    # Return the current x-value and the corresponding function value (peak)
     return (curr, func(curr))
 
 
