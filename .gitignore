@@ -1,2 +1,4 @@
 .venv/
 tests/
+assignment_5/test.csv
+assignment_5/training.csv
